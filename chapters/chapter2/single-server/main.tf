@@ -10,6 +10,22 @@ provider "aws" {
   secret_key                  = "mock_secret_key"
 }
 
+# 💡 NEW CONFIGURATION: The Remote Backend Block
+terraform {
+  backend "s3" {
+    # The name of the S3 bucket we scaffolded earlier
+    bucket         = "srini-tf-revision-state-bucket"
+
+    # The unique file path where this specific folder will store its state file inside the bucket
+    key            = "chapters/chapter2/single-server/terraform.tfstate"
+    region         = "us-east-2"
+
+    # The DynamoDB table name we scaffolded for distributed file locking
+    dynamodb_table = "srini-tf-revision-locks-table"
+    encrypt        = true
+  }
+}
+
 resource "aws_instance" "example" {
   ami           = "ami-0fb653ca2d3203ac1" # Ubuntu 20.04 LTS in us-east-2
   instance_type = "t2.micro"
@@ -18,4 +34,4 @@ resource "aws_instance" "example" {
     Name = "terraform-example"
   }
 }
-
+i
