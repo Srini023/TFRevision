@@ -1,0 +1,14 @@
+# Ignore the hidden .terraform directory anywhere in the repository tree
+.terraform/
+**/.terraform/
+.terraform.lock.hcl
+
+# Ignore state files
+*.tfstate
+*.tfstate.*
+
+# Ignore sensitive variables
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
